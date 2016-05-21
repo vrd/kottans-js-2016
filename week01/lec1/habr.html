@@ -30,12 +30,12 @@
         <ul>
           <li><a href=... ><img src=... title="" alt="Главная страница"></a>
           <li><a href=... ><img src=... title="Меню" alt="Меню"></a>
-          <li><a hidden onclick="scrollSomewhere()"><img src=... title="Наверх" alt="Начало страницы"></a>
+          <li><a hidden onclick="scroll()"><img src=... title="Наверх" alt="Начало страницы"></a>
           <li><a href=... ><img src=... title="Войти" alt="Войти"></a>
         </ul>
       </nav>
 
-      <section hidden>
+      <nav hidden>
         <h1>Разделы</h1>
         <input type=text value="Поиск" name=search_sections>
         <ul>
@@ -53,9 +53,9 @@
           <li>Linux в Azure
           <li>Создай игру          
         </ul>
-      </section>
+      </nav>
 
-      <!-- There are more hidden sections when you are logged in -->
+      <!-- There are more hidden sections when user is logged in -->
 
       <main>
 
@@ -120,7 +120,7 @@
           <p>(текст статьи)</p>
           <br>
           <p>...когда они будут проходить свое собеседование.</p> 
-          <small>
+          <section>
             <img src=... alt="">
             <a href=...>семантика</a>,
             <a href=...>html5</a>,
@@ -128,7 +128,7 @@
             <a href=...>собеседование вопросы</a>,
             <a href=...>перевод</a>,
             <a href=...>перевод с английского</a>
-          </small>          
+          </section>          
         </article>
 
         <footer>
