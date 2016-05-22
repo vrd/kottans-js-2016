@@ -37,7 +37,7 @@
 
       <nav hidden>
         <h1>Разделы</h1>
-        <input type=text value="Поиск" name=search_sections>
+        <input type=text value="Поиск">
         <ul>
           <li>Публикации
           <li>Хабы
@@ -55,7 +55,7 @@
         </ul>
       </nav>
 
-      <!-- There are more hidden sections when user is logged in -->
+      <!-- There are more hidden navs when user is logged in -->
 
       <main>
 
@@ -69,36 +69,11 @@
             </tr>
           </table>
           <ul>
-            <li>
-              <table>
-                <tr><td><img src=... alt=""> 
-                <tr><td>Профиль
-              </table>
-            </li>
-            <li>
-              <table>
-                <tr><td>1 
-                <tr><td>Публикации
-              </table>
-            </li>
-            <li>
-              <table>
-                <tr><td>5 
-                <tr><td>Комментарии
-              </table>
-            </li>
-            <li>
-              <table>
-                <tr><td>0 
-                <tr><td>Избранное
-              </table>
-            </li>
-            <li>
-              <table>
-                <tr><td>0 
-                <tr><td>Подписчики
-              </table>
-            </li>
+            <li><a href=...><img src=... alt=""><br>Профиль</a>
+            <li><a href=...>1<br>Публикации</a>
+            <li><a href=...>5<br>Комментарии</a>            
+            <li><a href=...>0<br>Избранное</a>
+            <li><a href=...>0<br>Подписчики</a> 
           </ul>
         </header>
 
@@ -120,7 +95,7 @@
           <p>(текст статьи)</p>
           <br>
           <p>...когда они будут проходить свое собеседование.</p> 
-          <section>
+          <small>
             <img src=... alt="">
             <a href=...>семантика</a>,
             <a href=...>html5</a>,
@@ -128,22 +103,20 @@
             <a href=...>собеседование вопросы</a>,
             <a href=...>перевод</a>,
             <a href=...>перевод с английского</a>
-          </section>          
+          </small>          
         </article>
 
         <footer>
-          <div>
+          <section>
             <div>
-              <span><a href=...><img src=... alt="Голосовать за"></a></span>
+              <button type=button><img src=... alt="Голосовать за"></button>
               <span>-5</span>
-              <span><a href=...><img src=... alt="Голосовать против"></a></span>
+              <button type=button><img src=... alt="Голосовать против"></button>
             </div>
             <div>
               <span><img src=... title="Просмотры публикации" alt="Количество просмотров публикации"></span>
               <span>44,2k</span>
-              <span>
-                <a href=...><img src=... title="Только зарегистрированные бла-бла-бла..." alt="Добавить в избранное. Уже добавили"></a>
-              </span>
+              <button type=button><img src=... title="Только зарегистрированные бла-бла-бла..." alt="Добавить в избранное. Уже добавили"></button>
               <span>281</span>              
               <ul>
                 <li><a href=...><img src=... title="Опубликовать ссылку в Twitter" alt="Опубликовать ссылку в Твиттер"></a>
@@ -152,8 +125,8 @@
                 <li><a href=...><img src=... title="Добавить ссылку в Pocket" alt="Добавить ссылку в Покет"></a>
               </ul>              
             </div>
-          </div>
-          <div>
+          </section>
+          <section>
             <span>
               <a href=...><img src=... alt="Профиль автора"></a>
             </span>            
@@ -161,17 +134,17 @@
               <tr>  <td>                            <td>карма <td>рейтинг
               <tr>  <td><a href=...>@rayproud</a>   <td>2,0   <td>0,0                
             </table>
-          </div>           
+          </section>           
         </footer>
 
-        <div>
+        <aside>
         <div>
           <img src=... alt="Реклама">
         </div>
         <small><a href=...>Реклама</a></small>          
-        </div>
+        </aside>
 
-        <section>
+        <aside>
           <h1>Самое читаемое</h1>
           <ul>
             <li><a href=...>Сейчас</a>
@@ -245,36 +218,33 @@
               </span>
             </li>
           </ul>          
-        </section>
+        </aside>
         
         <section>
           <h1>Комментарии (42)</h1> 
           <article>
             НЛО прилетело и опубликовало эту надпись здесь
           </article>
-          <article>
-            <div><img src=... alt=""><img src=... alt=""></div>
-            <div>
-              <header>
-                <img src=... alt="">
-                <a href=...>rusmvb</a>
-                <time datetime="2014-12-08 12:01">8 декабря 2014 в 12:01</time>
-                <a href=...><img src=... title="Ссылка на комментарий" alt="Ссылка на комментарий"></a>
-                <a href=...><img src=... title="Показать ветку комментариев" alt="Ветка комментариев"></a>
-                <a href=...><img src=... title="Показать предыдущий комментарий" alt="Предыдущий комментарий"></a>
-                <span>
-                  <span>0</span>
-                  <span><a href=...><img src=... alt="Проголосовать за этот комментарий"></a></span>
-                  <span><a href=...><img src=... alt="Проголосовать против этого комментария"></a></span>
-                </span>
-              </header>
-              <div>Полностью согласен, что сложновато. Это больше вопросы не на умение работать с html, а на знание специфических возможностей, которые в большинстве проектов совсем не уместны. На крайний случай в спецификации эти данные можно найти, а не в голове их таскать.<br>Приходилось присутствовать на подобных собеседованиях в качестве слушателя — таких вопросов точно не было ни у кого.
-              </div>              
-            </div>             
+          <div><img src=... alt=""><img src=... alt=""></div> <!-- "dots" before every comment for hierarchy visualization -->
+          <article>            
+            <header>
+              <img src=... alt="">
+              <a href=...>rusmvb</a>
+              <time datetime="2014-12-08 12:01">8 декабря 2014 в 12:01</time>
+              <a href=...><img src=... title="Ссылка на комментарий" alt="Ссылка на комментарий"></a>
+              <a href=...><img src=... title="Показать ветку комментариев" alt="Ветка комментариев"></a>
+              <a href=...><img src=... title="Показать предыдущий комментарий" alt="Предыдущий комментарий"></a>
+              <span>
+                <span>0</span>
+                <button type=button><img src=... alt="Проголосовать за комментарий"></button>
+                <button type=button><img src=... alt="Проголосовать против комментария"></button>
+              </span>
+            </header>
+            <p>Полностью согласен, что сложновато. Это больше вопросы не на умение работать с html, а на знание специфических возможностей, которые в большинстве проектов совсем не уместны. На крайний случай в спецификации эти данные можно найти, а не в голове их таскать.<br>Приходилось присутствовать на подобных собеседованиях в качестве слушателя — таких вопросов точно не было ни у кого.
+            </p>                           
           </article>
-          <article>
-            <div><img src=... alt=""></div>
-            <div>
+          <div><img src=... alt=""></div>
+          <article>            
               <header>
                 <img src=... alt="">
                 <a href=...>VBKesha</a>
@@ -284,31 +254,28 @@
                 <a href=...><img src=... title="Показать предыдущий комментарий" alt="Предыдущий комментарий"></a>
                 <span>
                   <span>+8</span>
-                  <span><a href=...><img src=... alt="Проголосовать за этот комментарий"></a></span>
-                  <span><a href=...><img src=... alt="Проголосовать против этого комментария"></a></span>
+                  <button type=button><img src=... alt="Проголосовать за комментарий"></button>
+                  <button type=button><img src=... alt="Проголосовать против комментария"></button>
                 </span>
               </header>
-              <div>Что то я никогда таких типичных вопросов не слышал на собеседованиях.</div>              
-            </div>             
+              <p>Что то я никогда таких типичных вопросов не слышал на собеседованиях.</p>             
           </article>
-          <article>
-            <div><img src=... alt=""><img src=... alt=""></div>
-            <div>
-              <header>
-                <img src=... alt="">
-                <a href=...>peter-moskvin</a>
-                <time datetime="2014-12-12 10:45">12 декабря 2014 в 10:45</time>
-                <a href=...><img src=... title="Ссылка на комментарий" alt="Ссылка на комментарий"></a>
-                <a href=...><img src=... title="Показать ветку комментариев" alt="Ветка комментариев"></a>
-                <a href=...><img src=... title="Показать предыдущий комментарий" alt="Предыдущий комментарий"></a>
-                <span>
-                  <span>0</span>
-                  <span><a href=...><img src=... alt="Проголосовать за этот комментарий"></a></span>
-                  <span><a href=...><img src=... alt="Проголосовать против этого комментария"></a></span>
-                </span>
-              </header>
-              <div>Теперь, видимо, услышите :)</div>              
-            </div>             
+          <div><img src=... alt=""><img src=... alt=""></div>
+          <article>            
+            <header>
+              <img src=... alt="">
+              <a href=...>peter-moskvin</a>
+              <time datetime="2014-12-12 10:45">12 декабря 2014 в 10:45</time>
+              <a href=...><img src=... title="Ссылка на комментарий" alt="Ссылка на комментарий"></a>
+              <a href=...><img src=... title="Показать ветку комментариев" alt="Ветка комментариев"></a>
+              <a href=...><img src=... title="Показать предыдущий комментарий" alt="Предыдущий комментарий"></a>
+              <span>
+                <span>0</span>
+                <button type=button><img src=... alt="Проголосовать за комментарий"></button>
+                <button type=button><img src=... alt="Проголосовать против комментария"></button>
+              </span>
+            </header>
+            <p>Теперь, видимо, услышите :)</p>                           
           </article> 
           <br>
           и так далее...
@@ -320,12 +287,12 @@
 
       <aside>
 
-        <div>
+        <section>
           <div>
             <img src=... alt="Реклама">
           </div>
           <small><a href=...>Реклама</a></small>          
-        </div>
+        </section>
 
         <section>
           <h1>Хабы</h1>
@@ -344,19 +311,19 @@
           <a href=...>Все хабы</a>
         </section>
 
-        <div>
+        <section>
           <small><a href=...>Яндекс.Директ</a></small>
           <div>
             <img src=... alt="Реклама">
           </div>                    
-        </div>
+        </section>
 
-        <div>
+        <section>
           <div>
             <img src=... alt="Реклама">
           </div>
           <small><a href=...>Реклама</a></small>          
-        </div>
+        </section>
 
         <section>
           <h1>Похожие публикации</h1>
@@ -419,7 +386,7 @@
 
       <hr>
 
-      <div>
+      <aside>
 
         <section>
           <h1>Интересные публикации</h1>
@@ -475,17 +442,17 @@
           <small><a href=...>Реклама</a></small>         
         </div>
 
-      </div>
+      </aside>
 
       <hr>
 
       <footer>        
-        <div>
+        <section>
           <ul>
             <li><a href=...>Войти</a>
             <li><a href=...>Регистрация</a>
           </ul>
-        </div>
+        </section>
         <section>
           <h1>Разделы</h1>
           <ul>
@@ -525,18 +492,18 @@
             <li><a href=...>Работа в IT</a>
           </ul>
         </section>
-        <div>
-          <ul>
-            <li><a href=...>&copy; TM</a>
-            <li><a href=...>Служба поддержки</a>
-            <li><a href=...>Мобильная версия</a>
+        <section>
+          <ul>            
+              <li><a href=...>&copy; TM</a>
+              <li><a href=...>Служба поддержки</a>
+              <li><a href=...>Мобильная версия</a>
             <li>
               <span><img src=... alt="Хабрахабр в Твиттере"></span>
               <span><img src=... alt="Хабрахабр на Фейсбуке"></span>
               <span><img src=... alt="Хабрахабр во ВКонтакте"></span>
             </li>              
           </ul>            
-        </div>              
+        </section>              
       </footer>
       
     </div>
