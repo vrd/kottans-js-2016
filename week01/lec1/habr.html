@@ -60,20 +60,22 @@
       <main>
 
         <header>
-          <span>
-            <a href=...><img src=... alt="Профиль автора"></a>
-          </span>
-          <table>
+          <a href=...>                      
+            <picture>
+              <img src=... srcset=... alt="Профиль автора">
+            </picture>
+          </a>          
+          <table> <!-- Yep, it's small but proud table -->
             <tr>  <td><a href=...>@rayproud</a>   <td>2,0     <td>0,0
             <tr>  <td>Пользователь                <td>карма   <td>рейтинг
             </tr>
           </table>
           <ul>
-            <li><a href=...><img src=... alt=""><br>Профиль</a>
-            <li><a href=...>1<br>Публикации</a>
-            <li><a href=...>5<br>Комментарии</a>            
-            <li><a href=...>0<br>Избранное</a>
-            <li><a href=...>0<br>Подписчики</a> 
+            <li><a role=button href=...><div><img src=... alt=""></div><div>Профиль</div></a>
+            <li><a role=button href=...><div>1</div><div>Публикации</div></a>
+            <li><a role=button href=...><div>5</div><div>Комментарии</div></a>            
+            <li><a role=button href=...><div>0</div><div>Избранное</div></a>
+            <li><a role=button href=...><div>0</div><div>Подписчики</div></a> 
           </ul>
         </header>
 
@@ -127,9 +129,11 @@
             </div>
           </section>
           <section>
-            <span>
-              <a href=...><img src=... alt="Профиль автора"></a>
-            </span>            
+            <a href=...>
+              <picture>
+                <img src=... srcset=... alt="Профиль автора">
+              </picture>
+            </a>            
             <table>
               <tr>  <td>                            <td>карма <td>рейтинг
               <tr>  <td><a href=...>@rayproud</a>   <td>2,0   <td>0,0                
