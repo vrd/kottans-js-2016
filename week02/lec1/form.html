@@ -3,7 +3,8 @@
 
   <head>
     <meta charset=utf-8>
-    <title>Habrahabr.ru</title>
+    <title>Q | Place order</title>
+    <link rel=stylesheet  href="./style.css">
 
   <body>
     <main>
@@ -50,12 +51,48 @@
         </header>
         <section>
           <h1>SELECT WHAT YOU WANT TO TRANSLATE</h1>
-          <input type="radio" name="type-select">
-          <input type="radio" name="type-select" checked>
-          <input type="radio" name="type-select">
+          <div class=ts-wrap>
+            <label class=ts-radio>
+              <input type=radio name=ts value=web>
+              <img src="" alt="Website">
+            </label>
+            <label class=ts-radio>
+              <input type=radio name=ts value=doc checked>
+              <img src="" alt="Document">
+            </label>
+            <label class=ts-radio>
+              <input type=radio name=ts value=social>
+              <img src="" alt="Social profile">
+            </label>
+          </div>
         </section>
         <ol>
           <li>
+            <h1>Upload your documents</h1>
+            <h2>(Doc, Docx, Text, PDF, Markdown)<h2>
+            <button type=button name=upload-file>Upload a new file</button>
+            <table>
+              <tr>
+                <th>FILE NAME<th>FILE SIZE<th>NUMBER OF WORDS<th>REMOVE
+              </tr>
+              <tr>
+                <td>
+                  <div><img src=""></div>business_operations.docx
+                </td>
+                <td>78kB
+                <td>842                  
+                <td>REMOVE
+              </tr>
+              <tr>
+                <td>
+                  <div><img src=""></div>business_financial.docx
+                </td>
+                <td>25kB
+                <td>2326                  
+                <td>REMOVE
+              </tr>
+            </table>
+
             
           </li>
           <li>

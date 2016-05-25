@@ -1,0 +1,20 @@
+body {
+  font: 12px "Proxima Nova", Arial, sans-serif;
+  background: #ccc;
+  color: #222;
+footer
+}
+body button {
+  color: #f00;
+  height: 0px;
+  padding: 20px;
+  border-width: 1px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+body main {
+  width: 80%;
+  margin: auto;
+nav
+}
