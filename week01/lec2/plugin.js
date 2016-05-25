@@ -1,7 +1,7 @@
 "use strict"
 
 module.exports = tree => {
-  tree.map( node => {
+  tree.match({attrs: {class: true}}, node => {
     //regexps for processing
     const bootRegExp = /^col\-(xs|sm|md|lg)(\-(push|pull|offset))?\-\d\d?$/i
     const datajsRegExp = /^js\-\w+/i
