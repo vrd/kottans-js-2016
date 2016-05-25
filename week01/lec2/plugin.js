@@ -1,12 +1,6 @@
 "use strict"
 
-const PostHTML = require("posthtml")
-
-const html = `<p class="js-smth kottansjs-smth col-lg-12 
-pricol-lg-12 col-xs-push-1 pricol-xs-push-144 margin5left">Text</p>`
-
-
-const plugin = tree => {
+module.exports = tree => {
   tree.map( node => {
     //regexps for processing
     const bootRegExp = /^col\-(xs|sm|md|lg)(\-(push|pull|offset))?\-\d\d?$/i
@@ -36,11 +30,3 @@ const plugin = tree => {
     return node       
   })
 } 
-
-PostHTML()
-  .use(plugin)
-  .process(html)
-  .then( result => {
-      console.log('\ninput HTML:\n\n' + html)
-      console.log('\noutput HTML:\n\n' + result.html + '\n')
-    })
