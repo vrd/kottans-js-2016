@@ -5,16 +5,94 @@ body {
 footer
 }
 body button {
-  color: #f00;
-  height: 0px;
-  padding: 20px;
+  height: 40px;
+  width: 120px;
+  text-style: bold;
+  border-style: solid;
+  border-color: #222;
   border-width: 1px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
 body main {
-  width: 80%;
+  width: 1000px;
   margin: auto;
-nav
+}
+body main nav {
+  margin: 50px 0px 50px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+body main nav img {
+  height: 100px;
+  width: 100px;
+}
+body main form {
+  background: #eee;
+  border-style: solid;
+  border-color: #888;
+  border-width: 2px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+section
+ol
+footer
+}
+body main form header {
+  display: flex;
+  height: 150px;
+  align-items: stretch;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #aaa;
+}
+body main form header .summary {
+  flex: 2.5;
+  padding: 20px;
+  display: flex;
+}
+body main form header .summary .icon {
+  margin: 10px;
+}
+body main form header .summary .icon img {
+  width: 50px;
+  height: 50px;
+}
+body main form header .summary table {
+  margin: 10px;
+}
+body main form header .summary table caption {
+  margin: 10px;
+  text-align: left;
+}
+body main form header .summary table tr th {
+  margin: 10px;
+}
+body main form header .summary table tr td {
+  margin: 10px;
+}
+body main form header .main-buttons {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+body main form header .help {
+  padding: 20px;
+  flex: 1.5;
+  display: flex;
+}
+body main form header .help .icon {
+  margin: 10px;
+}
+body main form header .help .icon img {
+  width: 50px;
+  height: 50px;
+}
+body main form header .help .help-text address {
+  text-decoration: bold;
 }
