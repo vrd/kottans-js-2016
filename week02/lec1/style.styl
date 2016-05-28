@@ -3,111 +3,261 @@ border-radius()
   -moz-border-radius arguments
   border-radius arguments
   
-border-bottom(style width color)
-  border-bottom-style style  
-  border-bottom-width width
-  border-bottom-color color 
 
-body
-  font 12px "Proxima Nova", Arial, sans-serif
-  background #ccc
-  color #222
+   
+// body h1 dl dt
+//   margin 0
   
-  button
-    height 40px
-    width 120px
-    text-style bold    
-    border-style solid 
-    border-color #222  
-    border-width 1px
-    border-radius 5px
+*
+  unset all
     
-  main
-    width: 1000px
-    margin: auto
+html
+  
+
+  body
+    font-family "Proxima Nova", Arial, sans-serif
+    font-size 11px
+    background #ECEEF4
+    color #A5ABC5
     
-    nav
-      margin 50px 0px 50px 0px
-      display flex
-      justify-content space-between
-      align-items center
-      
-      img
-        height 100px
-        width 100px
-    
-    form
-      background #eee
+    button
+      height 45px
+      width 160px
+      font-weight bold
+      font-size 10px    
       border-style solid 
-      border-color #888  
-      border-width 2px
-      border-radius 5px  
+      border-color #C9D0E1  
+      border-width 1px
+      border-radius 5px
+      color #6E768F
+      background-color #F7F7FA
       
-      header
+    button:hover
+      border-width 2px
+      background-color #e7e7eA
+      
+    .place-order
+      color #fff
+      border-color #57B5B2
+      background-color #5FCAC6
+      
+    .place-order:hover
+      border-width 2px
+      background-color #4FbAb6
+      
+      
+    .nav-button
+      height 45px
+      width 140px
+      font-weight bold
+      font-size 11px    
+      border 1px solid #C9D0E1
+      border-radius 5px
+      color #C9D0E1
+      background-color #ECEEF4
+      
+    a:link
+      text-decoration none
+      color #6E768F
+      font-weight bold
+      font-style normal
+      
+    a:visited
+      color #6E768F
+      
+    a:hover
+      text-decoration underline
+      
+    table
+      text-align left
+      margin 5px
+      font-size 11px
+                                
+      caption
+        text-align left
+        margin-top 5px
+        margin-bottom 20px                
+        font-weight bold
+      
+      tr
+        height 20px
+      
+      tr:nth-child(1)
+        height 25px            
+          
+        th, td
+          width 100px
+          
+        th
+          font-weight 900       
+      
+    main
+      max-width: 1040px
+      padding-left 10px
+      padding-right 10px
+      margin-right auto
+      margin-left auto
+      
+      
+      nav
+        height 200px
         display flex
-        height 150px
-        align-items stretch
-        border-bottom solid 2px #aaa
+        justify-content space-between
+        align-items center
         
-        .summary
-          flex 2.5
-          padding 20px
+        
+        img
+          height 100px
+          width 100px
+      
+      form
+        color #6E768F
+        background-color #fff
+        border-style solid 
+        border-color #C9D0E1  
+        border-width 1px
+        border-radius 5px  
+        
+        header
           display flex
-                   
-          .icon
-            margin 10px
+          flex-wrap wrap
+          align-items stretch
+          border-bottom solid 2px #E4E7F0
+          
+          h1, &
+            font-size 11px 
             
-            img
-              width 50px
-              height 50px        
+          img
+            width 20px
+            height 20px
+          
+          
+          .summary
+            flex 2.5
+            padding 20px 30px 20px 30px
+            display flex
+                     
+            .icon
+              margin 5px
               
-          table
-            margin 10px
-                        
-            caption
+                      
+                
+                       
+                           
+              
+          .main-buttons
+            padding 20px
+            flex 1
+            display flex
+            flex-direction column
+            //justify-content space-around
+              
+            button
+              margin-top 10px
+            
+            
+          .help
+            padding 20px
+            flex 1.5
+            display flex
+            
+            .icon
               margin 10px
-              text-align left
+              
+              // img
+              //   width 20px
+              //   height 20px           
+              
+              h1, address                
+                font-weight bold
             
-            tr  
-              th
-                margin 10px                
-              td
-                margin 10px            
-            
-        .main-buttons
-          padding 20px
-          flex 1
+            a:nth-child(1)
+              margin-right 10px  
+              
+              
+
+        .select
           display flex
           flex-direction column
           justify-content space-around
+          align-items center
           
-          
-        .help
-          padding 20px
-          flex 1.5
-          display flex
-          
-          .icon
-            margin 10px
+          h1
+            margin-top 80px
+            font-weight normal
             
+          .ts-wrap
+            margin-top 30px
+            
+            input
+              display none
+              
             img
-              width 50px
-              height 50px
-                
-          .help-text              
-            address
-              text-decoration bold
+              margin 10px
+              height 250px
+              width 250px
+              
+              
+            //img:hover
+              
             
 
-      section
-        
-      ol
-        
-      footer
-    
+          
+          
+        ol
+          counter-reset li
+          
+          li
+            width 300px
+            display inline
+            list-style none
+            margin 20px
+            
+            h1
+              display inline
+            
+            button, table
+              margin-left 50px
+              margin-top 30px
+              
+            table
+              padding 20px 30px 20px 30px
+              border-radius 5px
+              border 1px solid #C9D0E1           
+              
+              th,td
+                width 200px
+                
+                img
+                  width 32px
+                  height 32px
+              
+              
+          
+          //number of list item  
+          li::before
+            border 1px solid #f00;
+            width 50px
+            height 200px
+            margin-bottom 100px
+            content counter(li)
+            counter-increment li
+           
+          li
+              
+          
+            
+          
+          
+          
+        // footer
+      
 
 
 
-  footer  
+    footer
+      margin-top 50px
+      height 100px
+      background #111  
 
 

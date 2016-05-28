@@ -1,98 +1,225 @@
-body {
-  font: 12px "Proxima Nova", Arial, sans-serif;
-  background: #ccc;
-  color: #222;
-footer
+* {
+  unset: all;
 }
-body button {
-  height: 40px;
-  width: 120px;
-  text-style: bold;
+html body {
+  font-family: "Proxima Nova", Arial, sans-serif;
+  font-size: 11px;
+  background: #eceef4;
+  color: #a5abc5;
+}
+html body button {
+  height: 45px;
+  width: 160px;
+  font-weight: bold;
+  font-size: 10px;
   border-style: solid;
-  border-color: #222;
+  border-color: #c9d0e1;
+  border-width: 1px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  color: #6e768f;
+  background-color: #f7f7fa;
+}
+html body button:hover {
+  border-width: 2px;
+  background-color: #e7e7ea;
+}
+html body .place-order {
+  color: #fff;
+  border-color: #57b5b2;
+  background-color: #5fcac6;
+}
+html body .place-order:hover {
+  border-width: 2px;
+  background-color: #4fbab6;
+}
+html body .nav-button {
+  height: 45px;
+  width: 140px;
+  font-weight: bold;
+  font-size: 11px;
+  border: 1px solid #c9d0e1;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  color: #c9d0e1;
+  background-color: #eceef4;
+}
+html body a:link {
+  text-decoration: none;
+  color: #6e768f;
+  font-weight: bold;
+  font-style: normal;
+}
+html body a:visited {
+  color: #6e768f;
+}
+html body a:hover {
+  text-decoration: underline;
+}
+html body table {
+  text-align: left;
+  margin: 5px;
+  font-size: 11px;
+}
+html body table caption {
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+html body table tr {
+  height: 20px;
+}
+html body table tr:nth-child(1) {
+  height: 25px;
+}
+html body table tr:nth-child(1) th,
+html body table tr:nth-child(1) td {
+  width: 100px;
+}
+html body table tr:nth-child(1) th {
+  font-weight: 900;
+}
+html body main {
+  max-width: 1040px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: auto;
+  margin-left: auto;
+}
+html body main nav {
+  height: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+html body main nav img {
+  height: 100px;
+  width: 100px;
+}
+html body main form {
+  color: #6e768f;
+  background-color: #fff;
+  border-style: solid;
+  border-color: #c9d0e1;
   border-width: 1px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-body main {
-  width: 1000px;
-  margin: auto;
-}
-body main nav {
-  margin: 50px 0px 50px 0px;
+html body main form header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-body main nav img {
-  height: 100px;
-  width: 100px;
-}
-body main form {
-  background: #eee;
-  border-style: solid;
-  border-color: #888;
-  border-width: 2px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-section
-ol
-footer
-}
-body main form header {
-  display: flex;
-  height: 150px;
+  flex-wrap: wrap;
   align-items: stretch;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #aaa;
+  border-bottom: solid 2px #e4e7f0;
 }
-body main form header .summary {
+html body main form header h1,
+html body main form header {
+  font-size: 11px;
+}
+html body main form header img {
+  width: 20px;
+  height: 20px;
+}
+html body main form header .summary {
   flex: 2.5;
-  padding: 20px;
+  padding: 20px 30px 20px 30px;
   display: flex;
 }
-body main form header .summary .icon {
-  margin: 10px;
+html body main form header .summary .icon {
+  margin: 5px;
 }
-body main form header .summary .icon img {
-  width: 50px;
-  height: 50px;
-}
-body main form header .summary table {
-  margin: 10px;
-}
-body main form header .summary table caption {
-  margin: 10px;
-  text-align: left;
-}
-body main form header .summary table tr th {
-  margin: 10px;
-}
-body main form header .summary table tr td {
-  margin: 10px;
-}
-body main form header .main-buttons {
+html body main form header .main-buttons {
   padding: 20px;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
 }
-body main form header .help {
+html body main form header .main-buttons button {
+  margin-top: 10px;
+}
+html body main form header .help {
   padding: 20px;
   flex: 1.5;
   display: flex;
 }
-body main form header .help .icon {
+html body main form header .help .icon {
   margin: 10px;
 }
-body main form header .help .icon img {
-  width: 50px;
-  height: 50px;
+html body main form header .help .icon h1,
+html body main form header .help .icon address {
+  font-weight: bold;
 }
-body main form header .help .help-text address {
-  text-decoration: bold;
+html body main form header .help a:nth-child(1) {
+  margin-right: 10px;
+}
+html body main form .select {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+html body main form .select h1 {
+  margin-top: 80px;
+  font-weight: normal;
+}
+html body main form .select .ts-wrap {
+  margin-top: 30px;
+}
+html body main form .select .ts-wrap input {
+  display: none;
+}
+html body main form .select .ts-wrap img {
+  margin: 10px;
+  height: 250px;
+  width: 250px;
+}
+html body main form ol {
+  counter-reset: li;
+li
+}
+html body main form ol li {
+  width: 300px;
+  display: inline;
+  list-style: none;
+  margin: 20px;
+}
+html body main form ol li h1 {
+  display: inline;
+}
+html body main form ol li button,
+html body main form ol li table {
+  margin-left: 50px;
+  margin-top: 30px;
+}
+html body main form ol li table {
+  padding: 20px 30px 20px 30px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #c9d0e1;
+}
+html body main form ol li table th,
+html body main form ol li table td {
+  width: 200px;
+}
+html body main form ol li table th img,
+html body main form ol li table td img {
+  width: 32px;
+  height: 32px;
+}
+html body main form ol li::before {
+  border: 1px solid #f00;
+  width: 50px;
+  height: 200px;
+  margin-bottom: 100px;
+  content: counter(li);
+  counter-increment: li;
+}
+html body footer {
+  margin-top: 50px;
+  height: 100px;
+  background: #111;
 }

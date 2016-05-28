@@ -9,9 +9,9 @@
   <body>
     <main>
       <nav>
-        <button type=button name=go-back>&larr; GO BACK</button>
+        <a role=button name=go-back class=nav-button>&larr; GO BACK</a>
         <a class=logo href="" role=button><img src="" alt="Q"></a>
-        <button type=button name=sign-in>SIGN IN</button>       
+        <a role=button name=sign-in class=nav-button>SIGN IN</a>       
       </nav>
       <form>
         <header>
@@ -30,10 +30,10 @@
             </table>                      
           </section>
           <section class=main-buttons>
-              <button type=submit name=place-order>PLACE ORDER</button>
-              <button type=button name=print-quote>PRINT A QUOTE</button>
+              <button type=submit name=place-order class=place-order>PLACE ORDER</button>
+              <button type=button name=print-quote class=print-quote>PRINT A QUOTE</button>
           </section>
-          <article class=help>
+          <section class=help>
             <span class=icon>
               <img src="" alt="">
             </span>
@@ -45,30 +45,32 @@
                 <a href="mailto:help@qtest.com">help@qtest.com</a>
               </address>
             </span>
-          </article>
+          </section>
         </header>
-        <section>
-          <h1>SELECT WHAT YOU WANT TO TRANSLATE</h1>
+        <section class=select>
+          <h1>SELECT WHAT YOU WANT TO TRANSLATE<hr></h1>
           <div class=ts-wrap>
             <label class=ts-radio>
               <input type=radio name=ts value=web>
-              <img src="" alt="Website">
+              <img src="" alt="Website">    
             </label>
             <label class=ts-radio>
               <input type=radio name=ts value=doc checked>
-              <img src="" alt="Document">
+              <img src="" alt="Document">              
             </label>
             <label class=ts-radio>
               <input type=radio name=ts value=social>
-              <img src="" alt="Social profile">
+              <img src="" alt="Social profile">              
             </label>
           </div>
         </section>
         <ol>
+          <!-- 1 -->
           <li>
             <h1>Upload your documents</h1>
-            <h2>(Doc, Docx, Text, PDF, Markdown)<h2>
+            <small>(Doc, Docx, Text, PDF, Markdown)</small><br>
             <button type=button name=upload-file>Upload a new file</button>
+            
             <table>
               <tr>
                 <th>FILE NAME<th>FILE SIZE<th>NUMBER OF WORDS<th>REMOVE
@@ -90,24 +92,105 @@
                 <td>REMOVE
               </tr>
             </table>
-
-            
+                       
           </li>
+          <!-- 2 -->
           <li>
-            
+            <h1>Choose your language pairings</h1>
+            <input type="" name="">
+            <br>
+            <input type="" name="">
+            <input type="" name="">
+            <button type=button>+ ADD</button>
           </li>
+          <!-- 3 -->
           <li>
-            
+            <h1>Select your desired tone</h1>
+            <div class=tone-wrap>
+            <label class=tone-radio>
+              <input type=radio name=tone value=friend>
+              <img src="" alt="Website">
+              Friendly / Casual
+            </label>
+            <label class=tone-radio>
+              <input type=radio name=tone value=copr checked>
+              <img src="" alt="Document">
+              Corporate / Pro
+            </label>
+            <label class=tone-radio>
+              <input type=radio name=tone value=media>
+              <img src="" alt="Social profile">
+              Media / Formal
+            </label>
+          </div>
           </li>
+          <!-- 4 -->
           <li>
-            
+            <h1>Tell us how urgent this job is</h1>
+            <input type=range name=urgent>
+            <label>
+              <h1>Timeline info</h1>
+              <p> With an <b>average</b> timeline set up, our expert translator can take a reasonable amount of time perfecting your translation </p>
+            </label>
           </li>
+          <!-- 5 -->
           <li>
-            
+            <h1>Sign up and choose a payment method</h1>
+            <p>Already have an account with us? <a href=...>Sign in.</a></p>
+            <label>
+              <h1>FULL NAME</h1>
+              <input type=text name=name required>
+            </label>
+            <br>
+            <label>
+              <h1>EMAIL ADDRESS</h1>
+              <input type=email name=email required>
+            </label>
+            <label>
+              <h1>PASSWORD</h1>
+              <input type=password name=passw required>
+            </label>
+            <br>
+            <div class=card-wrap>
+              <label class=card-radio>
+                <input type=radio name=card value=visa-ms>
+                <img src="" alt="Website">
+                Website
+              </label>
+              <label class=card-radio>
+                <input type=radio name=card value=paypal checked>
+                <img src="" alt="Document">
+                Document
+              </label>
+              <label class=card-radio>
+                <input type=radio name=card value=amazon>
+                <img src="" alt="Social profile">
+                Social profile
+              </label>
+            </div>
+            <br>
+            <label>
+              <h1>CARD NUMBER</h1>
+              <input type=number name=card-number required>
+            </label>
+            <label>
+              <h1>EXPAIRY DATE</h1>
+              <input type=date name=card-date required>
+            </label>
+            <label>
+              <h1>CODE</h1>
+              <input type=number name=card-code required>
+            </label>
           </li>
         </ol>
+        
         <footer>
-          
+          <label>
+            <input type=checkbox name=agree>
+            I agree to the Terms and Conditions 
+          </label>
+          <button type=submit name=place-order>PLACE ORDER</button>
+          <button type=button name=print-quote>PRINT A QUOTE</button>    
         </footer>
       </form>
     </main>
