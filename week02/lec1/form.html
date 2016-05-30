@@ -13,6 +13,13 @@
           else document.getElementById('urgent'+i).style.color='#959CBA';
         }          
       }
+      function checkCCN(val) {
+        field = document.getElementById('card-number');
+        if (val.length < 16)
+          field.style.background = "#f00";
+        else if (val.length > 16)
+          field.style.background = "#080";
+      }
     </script>
 
   <body>
@@ -43,17 +50,17 @@
               <button type=button name=print-quote class=print-quote>PRINT A QUOTE</button>
           </section>
           <section class=help>
-            <span class=icon>
+            <div class=icon>
               <img src="" alt="">
-            </span>
-            <span class=help-text>
+            </div>
+            <div class=help-text>
               <h1>HELP CENTER</h1>
               <p>If you need assistance while placing your order, contact one of our beloved Project Manager by phone or email.</p>
               <address>
                 <a href="tel:+9710555555">+971 (0) 555 555</a>
                 <a href="mailto:help@qtest.com">help@qtest.com</a>
               </address>
-            </span>
+            </div>
           </section>
         </header>
         <section class=select>
@@ -69,7 +76,7 @@
             </label>
             <input type=radio name=ts value=social id=social>
             <label for=social class=ts-radio>
-              <img src="" alt=""><br>Social profile              
+              <img src="" alt=""><br>Social account              
             </label>
           </div>
         </section>
@@ -108,27 +115,27 @@
             <h1>Choose your language pairings</h1>
             <div class=choose-from>FROM</div>      
             <select name="from">
-              <option value="volvo">English</option>
-              <option value="saab">French</option>
-              <option value="fiat">Russian</option>
-              <option value="audi">Hindi</option>
+              <option value="en">English</option>
+              <option value="fr">French</option>
+              <option value="ru">Russian</option>
+              <option value="hi">Hindi</option>
             </select>
             <br>
             <div class=choose-to>TO</div>            
             <select name="to1">
-              <option value="volvo">Arabic</option>
-              <option value="saab">Africaans</option>
-              <option value="fiat">Hebrew</option>
-              <option value="audi">Ukrainian</option>
+              <option value="ar">Arabic</option>
+              <option value="af">Africaans</option>
+              <option value="he">Hebrew</option>
+              <option value="uk">Ukrainian</option>
             </select>
             <select name="to2">
-              <option value="volvo">Kurdish</option>
-              <option value="saab">Serbian</option>
-              <option value="fiat">Martian</option>
-              <option value="audi">Morze</option>
+              <option value="ku">Kurdish</option>
+              <option value="se">Serbian</option>
+              <option value="ma">Martian</option>
+              <option value="mo">Morze</option>
             </select> 
-            <a role=button class=remove href=...><img src=... alt="Rem"></a>    
-            <button type=button>+ ADD</button>
+            <a role=button class=remove-lang href=...><img src=... alt="Remove language"></a>    
+            <button type=button class=add-lang>+ ADD</button>
             
           </li>
           <!-- 3 -->
@@ -199,33 +206,64 @@
               </label>
             </div>
             <br>
-            <label>
+            <label class="ccn register">
               <h1>CARD NUMBER</h1>
-              <input type=number name=card-number required>
+              <input type=text name=card-number id=card-number pattern="[0-9]{16}" required oninput="checkCCN(value)">
             </label>
-            <label>
-              <h1>EXPAIRY DATE</h1>
-              <input type=date name=card-date required>
+            <label class=register>
+              <h1>EXPIRY DATE</h1>
+              <input type=text name=card-date class=card-date pattern="[0-9]{2}/[0-9]{2}" placeholder="MM/YY" required>
             </label>
-            <label>
+            <label class=register>
               <h1>CODE</h1>
-              <input type=number name=card-code required>
+              <input type=text name=card-code pattern="[0-9]{3}" class=card-code required>
             </label>
           </li>
         </ol>
         
-        <footer>
-          <label>
+        <footer class=form-footer>
+          <label class=i-agree>
             <input type=checkbox name=agree>
             I agree to the Terms and Conditions 
           </label>
-          <button type=submit name=place-order>PLACE ORDER</button>
-          <button type=button name=print-quote>PRINT A QUOTE</button>    
+          <button type=submit name=place-order class=place-order disabled>PLACE ORDER</button>
+          <button type=button name=print-quote class=print-quote>PRINT A QUOTE</button>    
         </footer>
       </form>
     </main>
     <footer>
-      
+    <div class=footer-wrap>
+      <section>
+        <div><img src=...></div>
+        <div>
+          <h1>WHAT WE DO</h1>
+          <p>We provide a full range of language services including content development, document, website amd social media accounts translations.</p>
+        </div>
+      </section>
+      <address>
+        <div><img src=...></div>
+        <div>
+          <h1>OUR MAIN OFFICE</h1>
+          <p>Dubai, UAE</p>
+          <p>P.O. Box: 502735</p>
+          <p>Phone: +971 (0) 44278128</p>
+        </div>
+      </address>
+      <section>
+        <div><img src=...></div>
+        <div>
+          <h1>CONNECT WITH US</h1>
+          <ul>
+            <li><img src=...>Facebook</li>
+            <li><img src=...>Twitter</li>
+            <li><img src=...>Linkedin</li>
+          </ul>
+        </div>
+      </section>
+      <div class=footer-logo>
+        <img src=...>
+      </div>
+    </div>  
     </footer>
 
 
