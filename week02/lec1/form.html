@@ -6,6 +6,14 @@
     <title>Q | Place order</title>
     <link rel=stylesheet  href="./style.css">
     <script type="text/javascript">
+      const nameRegExp = /\w+/
+      const emailRegExp = /\w+@\w+\.\w+/
+      const passwRegExp = /\w{6,}/
+      const dateRegExp = /\d{2}\/\d{2}/
+      const cvvRegExp = /\d{3}/
+      const visaRegExp = /^4/
+      const mcRegExp = /^5[1-5]/
+
       function paintUrgentLevel(val) {
         console.log('repaint!');
         for (let i in [0,1,2]) {
@@ -13,13 +21,111 @@
           else document.getElementById('urgent'+i).style.color='#959CBA';
         }          
       }
-      function checkCCN(val) {
-        field = document.getElementById('card-number');
-        if (val.length < 16)
-          field.style.background = "#f00";
-        else if (val.length > 16)
-          field.style.background = "#080";
+
+      function checkCCN(ccn) {
+        if ((ccn.length == 0) || (ccn.length > 16)) {
+          setCard('#f00', '!')
+          return false
+        }
+        else  {
+          if (visaRegExp.test(ccn)) setCard('#08f', 'VISA')
+          else if (mcRegExp.test(ccn)) setCard('#f80', 'MC')
+          else setCard('#eee', '?')
+          if (ccn.length < 16) return false
+          else {
+            if(luhnChk(ccn)) return true
+            else setCard('#f00', '!')
+            return false 
+          }  
+        }
       }
+
+      function setCard (color, text) {
+        document.getElementById('ccn-after').style.background = color;
+        document.getElementById('ccn-after').innerHTML = text;
+      }
+
+          /**
+     * Luhn algorithm in JavaScript: validate credit card number supplied as string of numbers
+     * @author ShirtlessKirk. Copyright (c) 2012.
+     * @license WTFPL (http://www.wtfpl.net/txt/copying)
+     */
+      var luhnChk = (function (arr) {
+        return function (ccNum) {
+          var len = ccNum.length,
+            bit = 1,
+            sum = 0,
+            val;
+
+          while (len) {
+            val = parseInt(ccNum.charAt(--len), 10);
+            sum += (bit ^= 1) ? arr[val] : val;
+          }
+
+          return sum && sum % 10 === 0;
+        };
+      }([0, 2, 4, 6, 8, 1, 3, 5, 7, 9]));
+
+      function checkData(name, val) {
+        let clas = '.'+ name + '-after'
+        if (val.length == 0) setERR(clas)
+        else {
+          switch(name) {
+            case 'name': {
+              setOK(clas)
+              break;
+            }
+            case 'email': {
+              if (emailRegExp.test(val)) setOK(clas)
+              else setERR(clas)
+              break;
+            } 
+            case 'passw': {
+              if (val.length > 5) {setOK(clas)}
+              else {setERR(clas)}
+              break;
+            }
+            default: break;
+          }
+        }
+      }
+
+      function setOK(clas) {
+        document.querySelector(clas).style.background = "#76A7E1"
+        document.querySelector(clas).style.fontSize = "14px"
+        document.querySelector(clas).innerHTML = "L"
+      }
+
+      function setERR(clas) {
+        document.querySelector(clas).style.background = "#f00"
+        document.querySelector(clas).style.fontSize = "18px"
+        document.querySelector(clas).innerHTML = "+"
+      }
+
+      function checkForm() {
+        let buttons_nodelist = document.getElementsByClassName('place-order')
+        let buttons_arr = Array.prototype.slice.call(buttons_nodelist, 0);
+        if (nameRegExp.test(document.forms[0].elements['name'].value)
+          && emailRegExp.test(document.forms[0].elements['email'].value)
+          && passwRegExp.test(document.forms[0].elements['passw'].value)
+          && checkCCN(document.forms[0].elements['card-number'].value)
+          && dateRegExp.test(document.forms[0].elements['card-date'].value)
+          && cvvRegExp.test(document.forms[0].elements['card-code'].value)
+          && document.getElementById('i-agree').checked ) {          
+          buttons_arr.forEach(enableSubmit); 
+        } else {
+          buttons_arr.forEach(disableSubmit);
+        }
+      }
+
+      function enableSubmit(el) {
+        el.disabled = false
+      }
+
+      function disableSubmit(el) {
+        el.disabled = true
+      }
+
     </script>
 
   <body>
@@ -46,7 +152,7 @@
             </table>                      
           </section>
           <section class=main-buttons>
-              <button type=submit name=place-order class=place-order>PLACE ORDER</button>
+              <button type=submit name=place-order class=place-order disabled>PLACE ORDER</button>
               <button type=button name=print-quote class=print-quote>PRINT A QUOTE</button>
           </section>
           <section class=help>
@@ -85,8 +191,7 @@
           <li class=upload>
             <h1>Upload your documents</h1>
             <small>(Doc, Docx, Text, PDF, Markdown)</small><br>
-            <button type=button name=upload-file>Upload a new file</button>
-            
+            <button type=button name=upload-file>Upload a new file</button>            
             <table>
               <tr>
                 <th>FILE NAME<th>FILE SIZE<th>NUMBER OF WORDS<th>REMOVE
@@ -107,8 +212,7 @@
                 <td>2326                  
                 <td><a role=button class=remove href=...><img src=... alt="Rem"></a>
               </tr>
-            </table>
-                       
+            </table>                       
           </li>
           <!-- 2 -->
           <li class=choose-lang>
@@ -134,9 +238,8 @@
               <option value="ma">Martian</option>
               <option value="mo">Morze</option>
             </select> 
-            <a role=button class=remove-lang href=...><img src=... alt="Remove language"></a>    
-            <button type=button class=add-lang>+ ADD</button>
-            
+            <a role=button class=remove-lang href=#><img src=... alt="Remove language"></a>    
+            <button type=button class=add-lang>+ ADD</button>            
           </li>
           <!-- 3 -->
           <li class=select-tone>
@@ -158,7 +261,7 @@
           <!-- 4 -->
           <li class=how-urgent>
             <h1>Tell us how urgent this job is</h1>
-            <input type=range name=urgent min=0 max=2 step=1 value=1 onchange="paintUrgentLevel(this.value)">
+            <input type=range name=urgent min=0 max=2 step=1 value=1 oninput="paintUrgentLevel(this.value)">
             <ul>
               <li id=urgent0>I GOT TIME</li>
               <li id=urgent1>AVERAGE</li>
@@ -178,16 +281,19 @@
             <p>Already have an account with us? <a href=...>Sign in.</a></p>
             <label class=register>
               <h1>FULL NAME</h1>
-              <input type=text name=name value="Mathieu Mayer" required>
+              <input type=text name=name placeholder="Mathieu Mayer" oninput="checkData(name, value); checkForm()" required>
+              <div class=name-after></div>
             </label>
             <br>
             <label class=register>
               <h1>EMAIL ADDRESS</h1>
-              <input type=email name=email value="mathieu.mm@me.com" required>
+              <input type=email name=email placeholder="mathieu.mm@me.com" required oninput="checkData(name, value); checkForm()">
+              <div class=email-after></div>
             </label>
             <label class="register password">
               <h1>CHOOSE A PASSWORD</h1>
-              <input type=password name=passw value="123456789" required>
+              <input type=password name=passw pattern="\w{6,}" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required oninput="checkData(name, value); checkForm()">
+              <div class=passw-after></div>
             </label>
             <br>            
             <div class=card-wrap>
@@ -206,24 +312,25 @@
               </label>
             </div>
             <br>
-            <label class="ccn register">
+            <label class="ccn input-card">
               <h1>CARD NUMBER</h1>
-              <input type=text name=card-number id=card-number pattern="[0-9]{16}" required oninput="checkCCN(value)">
+              <input type=tel name=card-number id=card-number pattern="\d{16}" required oninput="checkCCN(value); checkForm()">
+              <div id=ccn-after>?</div>
             </label>
-            <label class=register>
+            <label class=input-card>
               <h1>EXPIRY DATE</h1>
-              <input type=text name=card-date class=card-date pattern="[0-9]{2}/[0-9]{2}" placeholder="MM/YY" required>
+              <input type=text name=card-date class=card-date pattern="\d{2}/\d{2}" placeholder="MM/YY" oninput="checkForm()" required>
             </label>
-            <label class=register>
+            <label class=input-card>
               <h1>CODE</h1>
-              <input type=text name=card-code pattern="[0-9]{3}" class=card-code required>
+              <input type=text name=card-code pattern="\d{3}" class=card-code oninput="checkForm()" required>
             </label>
           </li>
         </ol>
         
         <footer class=form-footer>
-          <label class=i-agree>
-            <input type=checkbox name=agree>
+          <label class=agree>
+            <input type=checkbox name=agree id=i-agree onchange="checkForm()" required>
             I agree to the Terms and Conditions 
           </label>
           <button type=submit name=place-order class=place-order disabled>PLACE ORDER</button>

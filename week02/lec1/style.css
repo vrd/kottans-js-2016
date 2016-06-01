@@ -26,13 +26,18 @@ button {
 button:hover {
   background-color: #f0f0f2;
 }
+.place-order[disabled],
+.place-order[disabled]:hover {
+  border-color: #c9d0e1;
+  background-color: #e7e7ea;
+}
 .place-order {
   color: #fff;
   border-color: #57b5b2;
   background-color: #5fcac6;
 }
 .place-order:hover {
-  border-width: 2px;
+  border-width: 1px;
   background-color: #4fbab6;
 }
 .nav-button {
@@ -48,6 +53,11 @@ button:hover {
   background-color: #eceef4;
   text-align: center;
   line-height: 45px;
+}
+.nav-button:hover {
+  text-decoration: none;
+  background-color: #dcdee4;
+  color: #fff;
 }
 a:link {
   text-decoration: none;
@@ -258,7 +268,6 @@ header {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  border-bottom: 1px solid #c5cde0;
 }
 header table {
   text-align: left;
@@ -296,6 +305,7 @@ header img {
   flex: 2.5;
   padding: 20px 30px 20px 30px;
   display: flex;
+  border-bottom: 1px solid #c5cde0;
 }
 .icon {
   margin: 5px;
@@ -312,6 +322,8 @@ header img {
   display: flex;
   flex-direction: column;
   border-right: 1px solid #c5cde0;
+  border-bottom: 1px solid #c5cde0;
+  margin-right: -1px;
 }
 .main-buttons button {
   margin-top: 10px;
@@ -320,6 +332,7 @@ header img {
   padding: 20px;
   flex: 1.5;
   display: flex;
+  border-bottom: 1px solid #c5cde0;
 }
 .help .help-text {
   padding-left: 10px;
@@ -551,7 +564,9 @@ li > small {
   margin-bottom: 10px;
   font-size: 14px;
 }
-.card .register {
+.card .register,
+.card .input-card {
+  position: relative;
   border: 0px;
   vertical-align: middle;
   background: #fff;
@@ -561,11 +576,13 @@ li > small {
   margin-top: 10px;
   margin-right: 20px;
 }
-.card .register h1 {
+.card .register h1,
+.card .input-card h1 {
   font-size: 11px;
   margin: 0px 5px;
 }
-.card .register input {
+.card .register input,
+.card .input-card input {
   width: 230px;
   border: 1px solid #d1d4dc;
   -webkit-border-radius: 3px;
@@ -575,39 +592,77 @@ li > small {
   padding: 12px 15px;
   color: #5d6588;
 }
-.card .register input[type=password] {
+.card .register input[type=password],
+.card .input-card input[type=password] {
   padding: 3px 15px 3px 15px;
   letter-spacing: 6px;
   font-size: 28px;
 }
 .card .register input::-webkit-outer-spin-button,
-.card .register input::-webkit-inner-spin-button {
+.card .input-card input::-webkit-outer-spin-button,
+.card .register input::-webkit-inner-spin-button,
+.card .input-card input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.card .register #card-number {
+.card .register #card-number,
+.card .input-card #card-number {
   width: 250px;
   position: relative;
   z-index: 0;
 }
-.card .ccn::after {
-  display: inline-block;
-  content: "?";
-  width: 40px;
-  height: 25px;
-  background: #f00;
-  color: #fff;
-}
-.card .ccn::after .card-date {
+.card .register .card-date,
+.card .input-card .card-date {
   width: 120px;
   height: 15px;
 }
-.card .ccn::after .card-code {
+.card .register .card-code,
+.card .input-card .card-code {
   width: 60px;
 }
 .card .card-wrap label {
   width: 200px;
   height: 100px;
+}
+.card .name-after,
+.card .email-after,
+.card .passw-after,
+.card #ccn-after {
+  display: inline-block;
+  position: absolute;
+  z-index: 1;
+  right: 12px;
+  color: #fff;
+  text-align: center;
+}
+.card .name-after,
+.card .email-after,
+.card .passw-after {
+  content: "?";
+  width: 22px;
+  height: 22px;
+  bottom: 13px;
+  -webkit-border-radius: 11px;
+  -moz-border-radius: 11px;
+  border-radius: 11px;
+  background: #fff;
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: bolder;
+  transform: scaleX(-1) rotate(-45deg);
+}
+.card #ccn-after {
+  content: "?";
+  width: 40px;
+  height: 25px;
+  bottom: 12px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background: #eee;
+  line-height: 25px;
+  font-size: 13px;
+  font-weight: bold;
 }
 .form-footer {
   margin-right: 50px;
@@ -616,7 +671,7 @@ li > small {
   flex-wrap: wrap;
   justify-content: flex-end;
 }
-.form-footer .i-agree {
+.form-footer .agree {
   background-color: #fff;
   border: 0px;
 }
@@ -638,6 +693,7 @@ body > footer .footer-wrap section,
 body > footer .footer-wrap address {
   flex: 0 0 250px;
   display: flex;
+  font-style: normal;
 }
 body > footer .footer-wrap section div,
 body > footer .footer-wrap address div {
