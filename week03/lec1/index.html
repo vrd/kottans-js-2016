@@ -2,7 +2,8 @@
 <html>
 <head>
   <title>deepAssign</title>
-  <script type="text/javascript">
+  <!-- <script src=deepAssign.js></script> -->
+  <script>
 
     function deepAssign(target, ...sources)
     { 
@@ -71,22 +72,24 @@
 
     var o1 = {b: 1}
     var o2 = {e: 5, d: [1,2,3,4]}
-    var o3 = {b: 2}
+    var o3 = {b: 2, data: new Date()}
     var o4 = {c: 3, d: [5,6]}
     var target = {a: [o1, o2], f: 'f'}
     var source = {a: [o3, o4], g: 'g'}
 
     //merging
+    //var obj = Object.deepAssign(target, source)
     var obj = deepAssign(target, source)
     var objBefore = JSON.stringify(obj);
     console.log('result before: ' + objBefore)
     //changing objects
     o1 = {}
     o2.e = '5'
-    o3.b = 99
+    o3.data = new Date()
     o4.d[0] = 505
     //check - merged obj must not change
     var objAfter = JSON.stringify(obj);
+    console.log('changed target and source: ' + JSON.stringify([target, source]))
     console.log('result after: ' + objAfter)
     if (objBefore === objAfter) console.log('It works!')
     else console.error('Nooooooooo')
