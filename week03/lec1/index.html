@@ -1,11 +1,10 @@
-(function()
-{
-  'use strict'
-  //if (typeof Object.deepAssign == "function") return
+<!DOCTYPE html>
+<html>
+<head>
+  <title>deepAssign</title>
+  <script type="text/javascript">
 
-  Object.defineProperty(Object, 'deepAssign',
-  {
-    value: function deepAssign(target, ...sources)
+    function deepAssign(target, ...sources)
     { 
       //helper function for copying objects (mini assign) 
       function copy(from)
@@ -68,9 +67,19 @@
       }
 
       return to 
-    },
-    writable: true,
-    configurable: true
-  })
-})()
+    }
 
+    var o1 = {b: 2}
+    var o2 = {c: 3}
+    var obj = deepAssign({}, {a: [o1, o2]})
+    console.log('obj before: ' + JSON.stringify(obj))
+    o1.b = 99
+    console.log('obj after: ' + JSON.stringify(obj))
+
+
+  </script>
+</head>
+<body>
+Press F12
+</body>
+</html>
