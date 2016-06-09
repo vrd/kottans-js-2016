@@ -12,7 +12,7 @@
       { 
         if (from === null) throw new TypeError('null detected')
         //from is object and some work is needed
-        if (from.constructor === Object || from.constructor === Array) 
+        if (from instanceof Object || from instanceof Array) 
         {
           var to = new from.constructor
           Reflect.ownKeys(from).forEach( key => 
@@ -49,7 +49,7 @@
             if (from.propertyIsEnumerable(key))
             { //simple way
               //to[key] = deepAssign(to[key], from[key])
-              //
+              //more complex
               let descr = Object.getOwnPropertyDescriptor(from, key)
               if ('value' in descr) {
                 if (key in to) 
@@ -66,7 +66,6 @@
         //from and to are different types and can't be merged 
         else to = copy(from)
       }
-
       return to 
     },
     writable: true,

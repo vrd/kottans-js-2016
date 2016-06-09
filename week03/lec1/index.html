@@ -12,7 +12,7 @@
       { 
         if (from === null) throw new TypeError('null detected')
         //from is object and some work is needed
-        if (from.constructor === Object || from.constructor === Array) 
+        if (from instanceof Object || from instanceof Array) 
         {
           var to = new from.constructor
           Reflect.ownKeys(from).forEach( key => 
@@ -49,7 +49,7 @@
             if (from.propertyIsEnumerable(key))
             { //simple way
               //to[key] = deepAssign(to[key], from[key])
-              //
+              //more complex
               let descr = Object.getOwnPropertyDescriptor(from, key)
               if ('value' in descr) {
                 if (key in to) 
@@ -66,13 +66,12 @@
         //from and to are different types and can't be merged 
         else to = copy(from)
       }
-
       return to 
     }
 
-    var o1 = {b: 1}
+    var o1 = {b: 1, set: new Set(['a', 1])}
     var o2 = {e: 5, d: [1,2,3,4]}
-    var o3 = {b: 2, data: new Date()}
+    var o3 = {b: 2, /*data: new Date(),*/ set: new Set(['b', 2])}
     var o4 = {c: 3, d: [5,6]}
     var target = {a: [o1, o2], f: 'f'}
     var source = {a: [o3, o4], g: 'g'}
@@ -85,7 +84,7 @@
     //changing objects
     o1 = {}
     o2.e = '5'
-    o3.data = new Date()
+    //o3.data = new Date()
     o4.d[0] = 505
     //check - merged obj must not change
     var objAfter = JSON.stringify(obj);
