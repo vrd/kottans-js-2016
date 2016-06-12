@@ -1,0 +1,11 @@
+{
+  "name": "bluepromise",
+  "version": "1.0.0",
+  "description": "Homework #6",
+  "main": "bluepromise.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
