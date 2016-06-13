@@ -35,7 +35,21 @@ class MyPromise extends Promise {
     super(...arguments)
   }
 
+  static delay(ms, func) {
+    return new this((resolve, reject) => {
+      setTimeout(() => { resolve(func) }, ms)
+    })
+  }
+
   static map(iterable, mapper) {
+    let resMapper
+    console.log(mapper)
+    if (mapper instanceof Promise) {
+      console.log('promise in mapper detected!')
+      return mapper.then(m => this.map(iterable, m))
+    }
+    else
+      {resMapper = mapper}
 
     return new this((resolve, reject) => {
 
@@ -46,7 +60,7 @@ class MyPromise extends Promise {
       for (let i of iterable) {
         started++
         this.resolve(i).then(value => {
-          result.push(mapper(value))
+          result.push(resMapper(value))
           done++
           if (done == started)
             resolve(result)
@@ -57,6 +71,8 @@ class MyPromise extends Promise {
   } 
 }
 
+
+
 describe("MyPromise.map-test", function () {
 
     function mapper(val) {
@@ -64,7 +80,7 @@ describe("MyPromise.map-test", function () {
     }
 
     function deferredMapper(val) {
-        return MyPromise.resolve(mapper(val));
+        return MyPromise.delay(1, mapper(val));
     }
 
     specify("should map input values array", function() {

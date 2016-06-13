@@ -18,7 +18,7 @@ class MyPromise extends Promise {
 
       for (let promise of iterable) {
         started++
-        promise.then(value => {
+        MyPromise.resolve(i).then(value => {
           result.push(mapFunc(value))
           done++
           if (done == started)
