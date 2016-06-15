@@ -36,42 +36,256 @@ class MyPromise extends Promise {
   }
 
   static delay(ms, func) {
-    return new this((resolve, reject) => {
+    return new MyPromise((resolve, reject) => {
       setTimeout(() => { resolve(func) }, ms)
     })
   }
 
   static map(iterable, mapper) {
-    let resMapper
-    console.log(mapper)
-    if (mapper instanceof Promise) {
-      console.log('promise in mapper detected!')
-      return mapper.then(m => this.map(iterable, m))
-    }
-    else
-      {resMapper = mapper}
-
+    
     return new this((resolve, reject) => {
 
       let result = []
       let started = 0
       let done = 0
 
-      for (let i of iterable) {
-        started++
-        this.resolve(i).then(value => {
-          result.push(resMapper(value))
-          done++
-          if (done == started)
-            resolve(result)
-        },  reject)
-      }
-
+      this.resolve(iterable)
+      .then( iter => {
+        if (iter[Symbol.iterator]) {
+          for (let i of iter) {
+            started++
+            this.resolve(i)
+            .then(val => {
+              return mapper(val)            
+            },  reject)
+            .then(mapval => {
+              result.push(mapval)
+              done++
+              if (done == started)
+                resolve(result)
+            },  reject)
+          }
+        }
+        else
+          resolve(new Array())        
+      },  reject)
     })
-  } 
+  }
+
+  static filter(iterable, filterer) {
+
+    return new this((resolve, reject) => {
+      let result = []
+      let started = 0
+      let done = 0
+
+      this.resolve(iterable)
+      .then( iter => {
+        if (iter[Symbol.iterator]) {
+          for (let i of iter) {
+            started++
+            this.resolve(i)
+            .then(val => {
+              return filterer(val)            
+            },  reject)
+            .then(filtval => {
+              if (filtval) {
+                result.push(i)
+              } 
+              done++
+              if (done == started)
+                resolve(result)
+            },  reject)
+          }
+        }
+        else
+          resolve(new Array())        
+      },  reject)
+    })
+  }
+
+  static some(iterable, count) {
+    
+    return new this((resolve, reject) => {
+
+      let result = []
+      //let started = 0
+      let done = 0
+
+      this.resolve(iterable)
+      .then( iter => {
+        if (iter[Symbol.iterator]) {
+          for (let i of iter) {
+            //started++
+            this.resolve(i)
+            .then(val => {
+              if (done < count) {
+                result.push(val)
+              }
+              console.log(result)
+              done++
+              console.log(done)
+              if (done == count) {
+                console.log('resolve!')
+                resolve(result)
+              }
+            },  reject)
+          }
+        }
+        else
+          resolve(new Array())        
+      },  reject)
+    })
+  }
 }
 
+describe("MyPromise.some", function(){
+    it("should fulfill (basic test)", function(){
+        return MyPromise.some([1,2,3], 2).then(function(results){
+            assert.deepEqual(results, [1, 2]);
+        });
+    });
 
+    it("should reject on negative number", function(){
+        return MyPromise.some([1,2,3], -1)
+            .then(assert.fail)
+            .caught(MyPromise.TypeError, function(){
+            });
+    });
+
+    it("should reject on NaN", function(){
+        return MyPromise.some([1,2,3], -0/0)
+            .then(assert.fail)
+            .caught(MyPromise.TypeError, function(){
+            });
+    });
+
+    it("should reject on non-array", function(){
+        return MyPromise.some({}, 2)
+            .then(assert.fail)
+            .caught(MyPromise.TypeError, function(){
+            });
+    });
+
+    it("should reject with rangeerror when impossible to fulfill", function(){
+        return MyPromise.some([1,2,3], 4)
+            .then(assert.fail)
+            .caught(MyPromise.RangeError, function(e){
+            });
+    });
+
+    it("should fulfill with empty array with 0", function(){
+        return MyPromise.some([1,2,3], 0).then(function(result){
+            assert.deepEqual(result, []);
+        });
+    });
+});
+
+/*var RangeError = MyPromise.RangeError;
+
+describe("MyPromise.some-test", function () {
+
+    specify("should reject empty input", function() {
+        return MyPromise.some([], 1).caught(RangeError, function() {
+        });
+    });
+
+    specify("should resolve values array", function() {
+        var input = [1, 2, 3];
+        return MyPromise.some(input, 2).then(
+            function(results) {
+                assert(testUtils.isSubset(results, input));
+            },
+            assert.fail
+        )
+    });
+
+    specify("should resolve MyPromises array", function() {
+        var input = [MyPromise.resolve(1), MyPromise.resolve(2), MyPromise.resolve(3)];
+        return MyPromise.some(input, 2).then(
+            function(results) {
+                assert(testUtils.isSubset(results, [1, 2, 3]));
+            },
+            assert.fail
+        )
+    });
+
+    specify("should not resolve sparse array input", function() {
+        var input = [, 1, , 2, 3 ];
+        return MyPromise.some(input, 2).then(
+            function(results) {
+                assert.deepEqual(results, [void 0, 1]);
+            },
+            function() {
+                console.error(arguments);
+                assert.fail();
+            }
+        )
+    });
+
+    specify("should reject with all rejected input values if resolving howMany becomes impossible", function() {
+        var input = [MyPromise.resolve(1), MyPromise.reject(2), MyPromise.reject(3)];
+        return MyPromise.some(input, 2).then(
+            assert.fail,
+            function(err) {
+                //Cannot use deep equality in IE8 because non-enumerable properties are not
+                //supported
+                assert(err[0] === 2);
+                assert(err[1] === 3);
+            }
+        )
+    });
+
+    specify("should reject with aggregateError", function() {
+        var input = [MyPromise.resolve(1), MyPromise.reject(2), MyPromise.reject(3)];
+        var AggregateError = MyPromise.AggregateError;
+        return MyPromise.some(input, 2)
+            .then(assert.fail)
+            .caught(AggregateError, function(e) {
+                assert(e[0] === 2);
+                assert(e[1] === 3);
+                assert(e.length === 2);
+            });
+    });
+
+    specify("aggregate error should be caught in .error", function() {
+        var input = [MyPromise.resolve(1), MyPromise.reject(2), MyPromise.reject(3)];
+        var AggregateError = MyPromise.AggregateError;
+        return MyPromise.some(input, 2)
+            .then(assert.fail)
+            .error(function(e) {
+                assert(e[0] === 2);
+                assert(e[1] === 3);
+                assert(e.length === 2);
+            });
+    });
+
+    specify("should accept a MyPromise for an array", function() {
+        var expected, input;
+
+        expected = [1, 2, 3];
+        input = MyPromise.resolve(expected);
+
+        return MyPromise.some(input, 2).then(
+            function(results) {
+                assert.deepEqual(results.length, 2);
+            },
+            assert.fail
+        )
+    });
+
+    specify("should reject when input MyPromise does not resolve to array", function() {
+        return MyPromise.some(MyPromise.resolve(1), 1).caught(TypeError, function(e){
+        });
+    });
+
+    specify("should reject when given immediately rejected MyPromise", function() {
+        var err = new Error();
+        return MyPromise.some(MyPromise.reject(err), 1).then(assert.fail, function(e) {
+            assert.strictEqual(err, e);
+        });
+    });
+});*/
 
 describe("MyPromise.map-test", function () {
 
@@ -133,8 +347,7 @@ describe("MyPromise.map-test", function () {
     });
 
     specify("should resolve to empty array when input MyPromise does not resolve to an array", function() {
-        return MyPromise.map(MyPromise.resolve(123), mapper).caught(TypeError, function(e){
-        });
+        return MyPromise.map(MyPromise.resolve(123), mapper).catch(function(e){});          
     });
 
     specify("should map input MyPromises when mapper returns a MyPromise", function() {
@@ -155,6 +368,130 @@ describe("MyPromise.map-test", function () {
                 assert(result === 2);
             }
         );
+    });
+});
+
+
+describe("MyPromise filter", function() {
+
+    function ThrownError() {}
+
+
+    var arr = [1,2,3];
+
+    function assertArr(arr) {
+        assert(arr.length === 2);
+        assert(arr[0] === 1);
+        assert(arr[1] === 3);
+    }
+
+    function assertErr(e) {
+        assert(e instanceof ThrownError);
+    }
+
+    function assertFail() {
+        assert.fail();
+    }
+  
+      
+
+    describe("should accept eventual booleans", function() {
+        specify("simple filterer function", function() {
+            return MyPromise.filter(arr, function(v) {
+              return v !== 2;                
+            }).then(assertArr);
+        });
+
+        specify("immediately fulfilled", function() {
+            return MyPromise.filter(arr, function(v) {
+                return new MyPromise(function(r){
+                    r(v !== 2);
+                });
+            }).then(assertArr);
+        });
+
+
+        specify("already fulfilled", function() {
+            return MyPromise.filter(arr, function(v) {
+                return MyPromise.resolve(v !== 2);
+            }).then(assertArr);
+        });
+
+        specify("eventually fulfilled", function() {
+            return MyPromise.filter(arr, function(v) {
+                return new MyPromise(function(r){
+                    setTimeout(function(){
+                        r(v !== 2);
+                    }, 1);
+                });
+            }).then(assertArr);
+        });
+
+        specify("immediately rejected", function() {
+            return MyPromise.filter(arr, function(v) {
+                return new MyPromise(function(v, r){
+                    r(new ThrownError());
+                });
+            }).then(assertFail, assertErr);
+        });
+        specify("already rejected", function() {
+            return MyPromise.filter(arr, function(v) {
+                return MyPromise.reject(new ThrownError());
+            }).then(assertFail, assertErr);
+        });
+        specify("eventually rejected", function() {
+            return MyPromise.filter(arr, function(v) {
+                return new MyPromise(function(v, r){
+                    setTimeout(function(){
+                        r(new ThrownError());
+                    }, 1);
+                });
+            }).then(assertFail, assertErr);
+        });
+
+
+        specify("immediately fulfilled thenable", function() {
+            return MyPromise.filter(arr, function(v) {
+                return {
+                    then: function(f, r) {
+                        f(v !== 2);
+                    }
+                };
+            }).then(assertArr);
+        });
+        specify("eventually fulfilled thenable", function() {
+            return MyPromise.filter(arr, function(v) {
+                return {
+                    then: function(f, r) {
+                        setTimeout(function(){
+                            f(v !== 2);
+                        }, 1);
+                    }
+                };
+            }).then(assertArr);
+        });
+
+        specify("immediately rejected thenable", function() {
+            return MyPromise.filter(arr, function(v) {
+                return {
+                    then: function(f, r) {
+                        r(new ThrownError());
+                    }
+                };
+            }).then(assertFail, assertErr);
+        });
+        specify("eventually rejected thenable", function() {
+            return MyPromise.filter(arr, function(v) {
+                return {
+                    then: function(f, r) {
+                        setTimeout(function(){
+                            r(new ThrownError());
+                        }, 1);
+                    }
+                };
+            }).then(assertFail, assertErr);
+        });
+
     });
 });
 
