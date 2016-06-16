@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<title>bluePromise</title>
-	<script type="text/javascript">
-   
-    "use strict";
+"use strict";
 /*
 Based on When.js tests
 
@@ -171,7 +164,9 @@ class MyPromise extends Promise {
           resolve(arr[0])
         let total, index
         if (initialValue === undefined) {
-          total = new myprom.resolve(arr[0])
+          total = new myprom((resolve, reject) => {
+            resolve(arr[0])
+          }, reject)
           index = 1
         } else {
           total = new myprom.resolve(initialValue)
@@ -180,10 +175,14 @@ class MyPromise extends Promise {
         for (index; index < arr.length; index++) {
           console.log(total, arr[index])
           total = total.then(t => {
-            resolve(reducer(t, arr[index]))
+            console.log(reducer(t, arr[index]))
+            return (reducer(t, arr[index]))
           }, reject)   
         }
         resolve(total)        
+      }, reject)
+      .then( t => {
+        return t
       }, reject)
     })
   }
@@ -1360,13 +1359,3 @@ describe("MyPromise filter", function() {
         return MyPromise.all([ret1, ret2]);
     });
 });*/
-
-    
-  </script>
-</head>
-
-<body>
-
-</body>
-
-</html>
