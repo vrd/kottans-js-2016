@@ -86,7 +86,7 @@ class MyPromise extends Promise {
             started++
             this.resolve(i)
             .then(val => {
-              return filterer(val)            
+              return (filterer(val))            
             },  reject)
             .then(filtval => {
               if (filtval) {
@@ -143,6 +143,52 @@ class MyPromise extends Promise {
     })
   }
 
+  static reduce(iterable, reducer, initialValue) {
+    
+    return new this((resolve, reject) => {
+            
+      this.resolve(iterable)
+      // .then(iter => {
+      //   console.log(iter)        
+      // }, reject)
+      .then(iter => {
+        console.log(iter)
+        let arr = []
+        for (let i of iter) {
+          arr.push(i)
+        }
+        return arr
+      }, reject)
+      .then(arr => {
+        if (arr.length === 0)
+          resolve(undefined)
+        if (arr.length === 1)
+          resolve(arr[0])
+        let total, index
+        if (initialValue === undefined) {
+          total = this.resolve(arr[0]).then( t => [t, 1])          
+          index = 1
+          console.log(total)
+        } else {
+          total = this.resolve(initialValue).then( t => [t, 0])
+          index = 0
+        }
+
+        for (index; index < arr.length + 1; index++) {
+          total = total.then(([t, i]) => {
+            if (i !== arr.length)
+              return this.resolve(arr[i])
+                .then(val => {
+                  return this.resolve(reducer(t, val))
+            }).then(t => {return[t, ++i]})
+            else
+              resolve(t)
+          }, reject)                     
+        }              
+      }, reject)      
+    })
+  }
+
   reduce(reducer, initialValue) {
     let iterable = this
     let myprom = this.constructor
@@ -163,27 +209,24 @@ class MyPromise extends Promise {
         if (arr.length === 1)
           resolve(arr[0])
         let total, index
-        if (initialValue === undefined) {
-          total = new myprom((resolve, reject) => {
-            resolve(arr[0])
-          }, reject)
+        if (initialValue === undefined) {          
+          total = myprom.resolve([arr[0], 1])          
           index = 1
         } else {
-          total = new myprom.resolve(initialValue)
+          //total = new myprom.resolve(initialValue)
+          total = initialValue
           index = 0
-        }        
-        for (index; index < arr.length; index++) {
-          console.log(total, arr[index])
-          total = total.then(t => {
-            console.log(reducer(t, arr[index]))
-            return (reducer(t, arr[index]))
-          }, reject)   
         }
-        resolve(total)        
-      }, reject)
-      .then( t => {
-        return t
-      }, reject)
+
+        for (index; index < arr.length + 1; index++) {
+          total = total.then(([t, i]) => {
+            if (i !== arr.length)
+              return myprom.resolve(reducer(t, arr[i])).then(t => {return[t, ++i]})
+            else
+              resolve(t)
+          }, reject)                      
+        }               
+      }, reject)      
     })
   }
 }
@@ -306,26 +349,26 @@ describe("MyPromise.prototype.reduce", function() {
         });
     });
 
-    it("works when the iterator returns a MyPromise", function() {
+    it("works when the reducer returns a MyPromise", function() {
         return MyPromise.resolve([ 1, 2, 3 ]).reduce(function(total, value) {
-            return promised(5).then(function(bonus) {
+            return promised(6).then(function(bonus) {
                 return total + value + bonus;
             });
         }).then(function(total) {
-            assert.strictEqual(total, (1 + 2+5 + 3+5));
+            assert.strictEqual(total, (1 + 2+6 + 3+6));
         });
     });
 
     it("works when the iterator returns a thenable", function() {
         return MyPromise.resolve([ 1, 2, 3 ]).reduce(function(total, value) {
-            return thenabled(total + value + 5);
+            return thenabled(total + value + 7);
         }).then(function(total) {
-            assert.strictEqual(total, (1 + 2+5 + 3+5));
+            assert.strictEqual(total, (1 + 2+7 + 3+7));
         });
     });
 });
 
-/*
+
 describe("MyPromise.reduce", function() {
 
     it("should allow returning values", function() {
@@ -403,6 +446,11 @@ describe("MyPromise.reduce", function() {
             });
         });
     });
+
+  });
+/*
+
+  
 
     describe("with an initial accumulator value", function() {
         ACCUM_CRITERIA.forEach(function(criteria) {
@@ -496,6 +544,8 @@ describe("MyPromise.reduce", function() {
             });
         });
     });
+
+
 
     describe("with a 0th value acting as an accumulator", function() {
         it("acts this way when an accumulator value is provided yet `undefined`", function() {
