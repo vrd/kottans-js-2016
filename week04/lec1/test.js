@@ -1,7 +1,6 @@
 "use strict";
 
 var assert = require("assert");
-var testUtils = require("./helpers/util.js");
 var MyPromise = require("./mypromise.js")
 
 
@@ -214,7 +213,23 @@ describe("MyPromise filter", function() {
     });
 });
 
+function isSubset(subset, superset) {
+  var i, subsetLen;
+  subsetLen = subset.length;
+  if (subsetLen > superset.length) {
+      return false;
+  }
+  for(i = 0; i<subsetLen; i++) {
+      if(!contains(superset, subset[i])) {
+          return false;
+      }
+  }
+  return true;
+}
 
+function contains(arr, result) {
+  return arr.indexOf(result) > -1;
+}
 
 describe("MyPromise.some", function(){
     it("should fulfill (basic test)", function(){
@@ -271,7 +286,7 @@ describe("MyPromise.some-test", function () {
         var input = [1, 2, 3];
         return MyPromise.some(input, 2).then(
             function(results) {
-                assert(testUtils.isSubset(results, input));
+                assert(isSubset(results, input));
             },
             assert.fail
         )
@@ -281,7 +296,7 @@ describe("MyPromise.some-test", function () {
         var input = [MyPromise.resolve(1), MyPromise.resolve(2), MyPromise.resolve(3)];
         return MyPromise.some(input, 2).then(
             function(results) {
-                assert(testUtils.isSubset(results, [1, 2, 3]));
+                assert(isSubset(results, [1, 2, 3]));
             },
             assert.fail
         )
