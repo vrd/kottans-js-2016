@@ -1,0 +1,16 @@
+{
+  "name": "tdd-kata-1.0",
+  "version": "1.0.0",
+  "description": "Homework for Kottans.org courses",
+  "main": "calc.js",
+  "scripts": {
+    "test": "mocha -w ./test.js",
+    "test:unit": "mocha -R nyan -w"
+  },
+  "author": "Oleksandr Goncharov",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}
