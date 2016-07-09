@@ -1,11 +1,11 @@
 {
-  "name": "http-app",
+  "name": "middleware",
   "version": "1.0.0",
-  "description": "\"\"",
+  "description": "Homework #8: Middleware",
   "main": "index.js",
   "scripts": {
     "start": "nodemon"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Oleksandr Goncharov",
+  "license": "MIT"
 }
