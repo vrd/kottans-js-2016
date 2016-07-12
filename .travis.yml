@@ -3,6 +3,6 @@ node_js:
   - "6"
 before_script:
   - cd week05/lec01
-  - npm install -g mocha
+  - npm install mocha
   - npm install chai
 script: cd week05/lec01; npm test
