@@ -5,4 +5,4 @@ before_script:
   - cd week05/lec01
   - npm install -g mocha
   - npm install -g chai
-script: cd week05/lec01; npm test
+script: npm test
