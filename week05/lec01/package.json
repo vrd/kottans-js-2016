@@ -4,8 +4,9 @@
   "description": "Homework for Kottans.org courses",
   "main": "calc.js",
   "scripts": {
-    "test": "mocha -w ./test.js",
-    "test:unit": "mocha -R nyan -w"
+    "test": "mocha ./test.js",
+    "test-watch": "mocha -w ./test.js",
+    "test-nyan": "mocha -R nyan -w"
   },
   "author": "Oleksandr Goncharov",
   "license": "MIT",
