@@ -66,7 +66,7 @@ describe ("add", () => {
 
   it("should support multiple long delimeters", () => {
     expect(add("//[%%%#][...]\n100%%%#2...3")).equal(105)
-    expect(add("//[***][?|+]\n100***2?|+3")).equal(105)    
+    expect(add("//[***][?|]\n100***2?|+3")).equal(105)    
   })
 })
 
