@@ -1,0 +1,12 @@
+Kottans
+<ul>
+  {{#each model as |kottan|}}
+    <li>
+    {{#link-to 'people.person' kottan.name}}
+    {{kottan.name}}
+    {{/link-to}}
+    </li>
+  {{/each}}
+</ul>
+
+{{liquid-outlet}}
