@@ -6,8 +6,8 @@ import config from './config/environment';
 let App;
 
 window.people = [
-      { id: 11, name: 'John', pokemonsIds: [1] },
-      { id: 12, name: 'Andrey', pokemonsIds: [4] },
+      { id: 11, name: 'John', pokemonsIds: [1,2,3] },
+      { id: 12, name: 'Andrey', pokemonsIds: [4,5,6] },
       { id: 13, name: 'Bort', pokemonsIds: [] }
     ];
 
