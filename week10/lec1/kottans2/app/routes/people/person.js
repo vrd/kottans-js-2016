@@ -10,6 +10,11 @@ export default Ember.Route.extend({
     })
     .then(pokemons => {
       return {kotan, pokemons};
+    })
+    .then(obj => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {resolve(obj)}, 1000);
+      })
     });
     //return {kotan: {name: params.person_name}, pokemons: [{name: 'dfdfd'}, {name: 'werwerwer'}]}
   }
